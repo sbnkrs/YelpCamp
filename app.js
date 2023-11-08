@@ -49,9 +49,11 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
 const store = new MongoDBStore({
     url: dbUrl,
-    secret: 'secret',
+    secret,
     touchAfter: 24*60*60
 });
 
